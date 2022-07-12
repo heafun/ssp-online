@@ -6,6 +6,13 @@ public class NetworkManagerSSP : NetworkManager
     [SerializeField]
     private Transform spawn1, spawn2;
 
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        Debug.Log(this.networkAddress);
+    }
+
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         // add player at correct spawn position
