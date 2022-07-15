@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4497449896385680816}
   - component: {fileID: 4497449896385680781}
   - component: {fileID: 4497449896385680818}
+  - component: {fileID: 6491043433877280890}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -120,3 +121,24 @@ MonoBehaviour:
   schere: {fileID: 21300000, guid: 5cd2b74f7d54df04b8c809363be56f2b, type: 3}
   stein: {fileID: 21300000, guid: ae766b60700209d42968cb5285f4bf22, type: 3}
   papier: {fileID: 21300000, guid: 57e3176d8a3ab3944a67e555b8918853, type: 3}
+  ready: 0
+--- !u!95 &6491043433877280890
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4497449896385680817}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cfd59738aa24a56439feed33923c2732, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

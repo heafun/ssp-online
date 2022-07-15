@@ -11,6 +11,7 @@ public class ClickHandler : MonoBehaviour
     private void Start()
     {
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManagerSSP>();
+        gameObject.SetActive(false);
     }
 
     public void Pick(int pick)

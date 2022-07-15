@@ -9,39 +9,77 @@ public class Player : NetworkBehaviour
     private Sprite schere, stein, papier;
 
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    public Pick currentPick { get; private set; } = Pick.Stein;
+    public bool ready = false;
+
+    public enum Pick
+    {
+        Schere, Stein, Papier
+    }
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
 
     [Command]
     public void CmdPick(int pick)
     {
-        DisplayPick(pick);
-    }
-
-    [ClientRpc]
-    public void DisplayPick(int pick)
-    {
+        Pick pickEnum = Pick.Stein;
         switch (pick)
         {
             case 0:
-                spriteRenderer.sprite = schere;
-                break;
-            case 1:
-                spriteRenderer.sprite = stein;
+                pickEnum = Pick.Schere;
                 break;
             case 2:
+                pickEnum = Pick.Papier;
+                break;
+        }
+
+        RpcPick(pickEnum);
+    }
+
+    [ClientRpc]
+    public void RpcPick(Pick pick)
+    {
+        currentPick = pick;
+        ready = true;
+    }
+
+    [ClientRpc]
+    public void RpcStartCountdown()
+    {
+        animator.SetTrigger("Count");
+        ready = false;
+    }
+
+    public void RevealPick()
+    {
+        switch (currentPick)
+        {
+            case Pick.Schere:
+                spriteRenderer.sprite = schere;
+                break;
+            case Pick.Stein:
+                spriteRenderer.sprite = stein;
+                break;
+            case Pick.Papier:
                 spriteRenderer.sprite = papier;
                 break;
+        }
+
+        if (NetworkClient.isHostClient)
+        {
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameMaster>().RpcSetState(GameMaster.SSPState.Picking);
         }
     }
 
     [ClientRpc]
     public void FlipX(bool flip)
     {
-        spriteRenderer.flipX = true;
+        spriteRenderer.flipX = flip;
     }
 }
