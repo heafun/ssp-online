@@ -42,6 +42,7 @@ public class NetworkManagerSSP : NetworkManager
         if (gameMaster != null)
         {
             NetworkServer.UnSpawn(gameMaster.gameObject);
+            Destroy(gameMaster.gameObject);
         }
     }
 
