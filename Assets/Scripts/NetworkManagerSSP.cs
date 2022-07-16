@@ -30,6 +30,9 @@ public class NetworkManagerSSP : NetworkManager
         {
             newPlayer.GetComponent<Player>().FlipX(true);
 
+            GameObject score = Instantiate(spawnPrefabs[1]);
+            NetworkServer.Spawn(score);
+
             gameMaster = Instantiate(spawnPrefabs[0]).GetComponent<GameMaster>();
             NetworkServer.Spawn(gameMaster.gameObject);
             gameMaster.RpcSetActive(true);

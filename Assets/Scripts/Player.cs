@@ -71,9 +71,9 @@ public class Player : NetworkBehaviour
                 break;
         }
 
-        if (NetworkClient.isHostClient)
+        if (NetworkClient.isHostClient && isLocalPlayer)
         {
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameMaster>().RpcSetState(GameMaster.SSPState.Picking);
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameMaster>().NextRound();
         }
     }
 
