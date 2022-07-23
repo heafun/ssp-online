@@ -30,6 +30,10 @@ public class MenuManager : MonoBehaviour
     [Scene] private string playScene;
     [SerializeField]
     private ApiSettings apiSettings;
+    [SerializeField]
+    private bool useExternalIp;
+
+    private string externalIp = ""; 
 
     private Coroutine updateGameListRoutine;
 
@@ -37,13 +41,23 @@ public class MenuManager : MonoBehaviour
     {
         addGameButton.GetComponent<Button>().onClick.AddListener(createGame);
         updateGameListRoutine = StartCoroutine(UpdateGameList());
+        GetExternalIpAdress();
     }
 
     private void createGame()
     {
         UnityWebRequest request = new UnityWebRequest($"{apiSettings.apiBaseUrl}OpenGames", "POST");
-        string localIp = GetLocalIPAddress();
-        byte[] bodyRaw = Encoding.UTF8.GetBytes($"{{ \"hostAddress\" : \"{localIp}\" }}");
+
+        string ip;
+        if (useExternalIp)
+        {
+            ip = externalIp;
+        } else
+        {
+            ip = GetLocalIPAddress();
+        }
+
+        byte[] bodyRaw = Encoding.UTF8.GetBytes($"{{ \"hostAddress\" : \"{ip}\" }}");
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
@@ -62,7 +76,7 @@ public class MenuManager : MonoBehaviour
                 ResponseObject response = JsonUtility.FromJson<ResponseObject>(request.downloadHandler.text);
 
                 transferConnectInfo.objectId = response.objectId;
-                transferConnectInfo.ip = localIp;
+                transferConnectInfo.ip = ip;
                 transferConnectInfo.networkMode = TransferConnectInfo.NetworkMode.Host;
 
                 StopCoroutine(updateGameListRoutine);
@@ -87,6 +101,19 @@ public class MenuManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private void GetExternalIpAdress()
+    {
+        UnityWebRequest request = UnityWebRequest.Get("https://api64.ipify.org");
+
+        request.SendWebRequest().completed += (AsyncOperation operation) =>
+        {
+            externalIp = request.downloadHandler.text;
+            Debug.Log(request.error);
+            Debug.Log(externalIp);
+            request.Dispose();
+        };
     }
 
     private IEnumerator UpdateGameList()

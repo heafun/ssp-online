@@ -940,6 +940,7 @@ MonoBehaviour:
   transferConnectInfo: {fileID: 11400000, guid: 244f4f65e38e25645b2b6249a66deca0, type: 2}
   playScene: Assets/Scenes/PlayScene.unity
   apiSettings: {fileID: 11400000, guid: 4dfdd9921d1176c45a219871ebe42422, type: 2}
+  useExternalIp: 0
 --- !u!1 &1802827704
 GameObject:
   m_ObjectHideFlags: 0
