@@ -270,5 +270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03c4868c8a460a48a3b24c824cddc04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transferConnectInfo: {fileID: 11400000, guid: 244f4f65e38e25645b2b6249a66deca0, type: 2}
+  apiSettings: {fileID: 11400000, guid: 4dfdd9921d1176c45a219871ebe42422, type: 2}
+  playScene: Assets/Scenes/PlayScene.unity
+  objectId: 
   ip: 
   opponentName: 

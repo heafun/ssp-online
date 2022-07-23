@@ -1,14 +1,47 @@
 using UnityEngine;
 using Mirror;
+using UnityEngine.Networking;
 
 public class NetworkManagerSSP : NetworkManager
 {
+    [SerializeField]
+    private TransferConnectInfo transferConnectInfo;
+    [SerializeField]
+    private ApiSettings apiSettings;
     [SerializeField]
     private Transform spawn1, spawn2;
     [SerializeField]
     public GameObject selectMenu;
 
     private GameMaster gameMaster;
+
+    public override void Start()
+    {
+        base.Start();
+
+        if (transferConnectInfo.networkMode == TransferConnectInfo.NetworkMode.Host)
+        {
+            NetworkManager.singleton.StartHost();
+        } else if(transferConnectInfo.networkMode == TransferConnectInfo.NetworkMode.Client)
+        {
+            NetworkManager.singleton.networkAddress = transferConnectInfo.ip;
+            NetworkManager.singleton.StartClient();
+        }
+    }
+
+    public override void OnApplicationQuit()
+    {
+        base.OnApplicationQuit();
+
+        UnityWebRequest request = UnityWebRequest.Delete($"{apiSettings.apiBaseUrl}OpenGames/{transferConnectInfo.objectId}");
+
+        foreach (string header in apiSettings.headers)
+        {
+            string[] keyValuePair = header.Split(":");
+
+            request.SetRequestHeader(keyValuePair[0], keyValuePair[1]);
+        }
+    }
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {

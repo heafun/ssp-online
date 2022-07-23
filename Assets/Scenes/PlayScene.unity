@@ -759,6 +759,8 @@ MonoBehaviour:
   - {fileID: 6505999044155182135, guid: 1670b9bb0d08b834c83561bb38993a76, type: 3}
   - {fileID: 6932927729373733686, guid: 40f5df3990f4924469763ddda015c3b7, type: 3}
   - {fileID: 3316972849539708161, guid: 7a4627e3fd08dc34ca970492b5e9106c, type: 3}
+  transferConnectInfo: {fileID: 11400000, guid: 244f4f65e38e25645b2b6249a66deca0, type: 2}
+  apiSettings: {fileID: 11400000, guid: 4dfdd9921d1176c45a219871ebe42422, type: 2}
   spawn1: {fileID: 1064793333}
   spawn2: {fileID: 1254080771}
   selectMenu: {fileID: 1854414820}

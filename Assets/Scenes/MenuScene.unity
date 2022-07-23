@@ -937,10 +937,9 @@ MonoBehaviour:
   addGameButton: {fileID: 1802827704}
   scrollViewContent: {fileID: 64476477}
   OpenGameButtonPrefab: {fileID: 3180082932001272272, guid: f5bda87de737f354aa16ea1bfd17100d, type: 3}
-  apiBaseUrl: https://parseapi.back4app.com/classes/
-  headers:
-  - X-Parse-Application-Id:oXatEXYNRhNEP5ggwzLzZZDUlrIwRMmpBYliUcQh
-  - X-Parse-REST-API-Key:8HzRZ6nYK1vKKsgtxSyI9TMYl56p8NdZpfsJzsER
+  transferConnectInfo: {fileID: 11400000, guid: 244f4f65e38e25645b2b6249a66deca0, type: 2}
+  playScene: Assets/Scenes/PlayScene.unity
+  apiSettings: {fileID: 11400000, guid: 4dfdd9921d1176c45a219871ebe42422, type: 2}
 --- !u!1 &1802827704
 GameObject:
   m_ObjectHideFlags: 0
